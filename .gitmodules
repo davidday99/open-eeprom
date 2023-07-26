@@ -1,0 +1,3 @@
+[submodule "open-eeprom-fw"]
+	path = open-eeprom-fw
+	url = git@github.com:davidday99/open-eeprom-fw.git
