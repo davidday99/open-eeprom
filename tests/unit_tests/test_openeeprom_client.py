@@ -17,6 +17,10 @@ class TestOpenEEPROMClient:
         dummy_client.nop()
         assert dummy_client.io.txfifo == bytes([OpenEEPROMCommands.NOP.value])
 
+    def test_sync(self, dummy_client):
+        dummy_client.sync()
+        assert dummy_client.io.txfifo == bytes([OpenEEPROMCommands.SYNC.value])
+
     def test_get_interface(self, dummy_client):
         dummy_client.get_interface_version()
         assert dummy_client.io.txfifo == bytes([OpenEEPROMCommands.GET_INTERFACE_VERSION.value])

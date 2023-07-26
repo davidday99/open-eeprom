@@ -7,20 +7,21 @@ from .transport.basetransport import BaseTransport
 
 class OpenEEPROMCommands(Enum):
     NOP = 0
-    GET_INTERFACE_VERSION = 1
-    GET_MAX_RX_SIZE = 2
-    GET_MAX_TX_SIZE = 3
-    TOGGLE_IO = 4
-    GET_SUPPORTED_BUS_TYPES = 5
-    SET_ADDRESS_BUS_WIDTH = 6
-    SET_ADDRESS_HOLD_TIME = 7
-    SET_PULSE_WIDTH_TIME = 8
-    PARALLEL_READ = 9
-    PARALLEL_WRITE = 10 
-    SET_SPI_CLOCK_FREQUENCY = 11
-    SET_SPI_MODE = 12
-    GET_SUPPORTED_SPI_MODES = 13
-    SPI_TRANSMIT = 14
+    SYNC = 1
+    GET_INTERFACE_VERSION = 2
+    GET_MAX_RX_SIZE = 3
+    GET_MAX_TX_SIZE = 4
+    TOGGLE_IO = 5
+    GET_SUPPORTED_BUS_TYPES = 6
+    SET_ADDRESS_BUS_WIDTH = 7
+    SET_ADDRESS_HOLD_TIME = 8
+    SET_PULSE_WIDTH_TIME = 9
+    PARALLEL_READ = 10
+    PARALLEL_WRITE = 11 
+    SET_SPI_CLOCK_FREQUENCY = 12
+    SET_SPI_MODE = 13
+    GET_SUPPORTED_SPI_MODES = 14
+    SPI_TRANSMIT = 15
 
 
 class OpenEEPROMResponseStatus:
@@ -35,6 +36,7 @@ class OpenEEPROMCommandFailedException(Exception):
 class OpenEEPROMClient:
     def __init__(self, io_handle: BaseTransport):
         self.io = io_handle
+        self.sync()
         self.max_rx_size = self.get_max_rx_size()
         self.max_tx_size = self.get_max_rx_size()
 
@@ -43,6 +45,11 @@ class OpenEEPROMClient:
         self.io.send(cmd)
         self._check_response_status()
 
+    def sync(self):
+        self.io.flush()
+        cmd = bytes([OpenEEPROMCommands.SYNC.value])
+        self.io.send(cmd)
+        self._check_response_status()
 
     def get_interface_version(self) -> int:
         cmd = bytes([OpenEEPROMCommands.GET_INTERFACE_VERSION.value])
