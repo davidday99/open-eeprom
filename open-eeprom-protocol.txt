@@ -1,0 +1,73 @@
+Version: 1.0.0
+
+ACK: 0x05
+NAK: 0x06
+
+Command List:
+    
+    General:
+        Command     Description               Parameters                                  Return value
+
+        0x00        NOP                       none                                        <ACK>
+        0x01        SYNC                      none                                        <ACK>
+        0x02        get_interface_version     none                                        <ACK> <16-bit version>
+        0x03        get_max_rx_size           none                                        <32-bit size>
+        0x04        get_max_tx_size           none                                        <32-bit size>
+        0x05        toggle_io                 <8-bit state (0 disabled, else enabled)>    <ACK> <8-bit set state>
+        0x06        get_supported_bus_types   none                                        <ACK> <8-bit mask>
+            
+    Parallel:
+        Command     Description               Parameters                                  Return value
+        
+        0x07        set_address_bus_width     <8-bit width>                               <ACK> <8-bit set width> / <NAK>
+        0x08        set_address_hold_time     <32-bit nsecs>                              <ACK> <32-bit nsec> / <NAK>
+        0x09        set_pulse_width_time      <32-bit nsecs>                              <ACK> <32-bit nsecs> / <NAK>
+        0x0A        parallel_read             <32-bit address> <32-bit nlen>              <ACK> <nbytes> / <NAK>
+        0x0B        parallel_write            <32-bit address> <32-bit nlen> <nbytes>     <ACK> / <NAK>
+
+    SPI:
+        Command     Description               Parameters                                  Return value
+
+        0x0C        set_spi_clock_freq        <32-bit frequency>                          <ACK> <32-bit set frequency> / <NAK>
+        0x0D        set_spi_mode              <8-bit mode (0-4, see below)>               <ACK> <8-bit set mode> / <NAK>
+        0x0E        get_supported_spi_modes   none                                        <ACK> <8-bit mask>
+        0x0F        spi_transmit              <32-bit nlen> <nbytes>                      <ACK> <nbytes> / <NAK>
+
+    I2C:
+        N/A 
+
+
+BUS TYPES:
+    PARALLEL
+    SPI
+    I2C
+
+SPI MODES:
+    MODE 0 - clock logic low, data sampled on rising edge and shifted out on falling edge 
+    MODE 1 - clock logic low, data sampled on falling edge and shifted out on rising edge
+    MODE 2 - clock logic high, data sampled on rising edge and shifted out on falling edge
+    MODE 3 - clock logic high, data sampled on falling edge and shifted out on rising edge
+         
+The parallel write algorithm is 
+
+```
+for i from 0 to nlen:
+    set address <address + i>
+    set data <nbytes[i]>
+    delay for <ADDRESS_HOLD_TIME>
+    enable chip 
+    delay for <PULSE_WIDTH_TIME>
+    disable chip
+```
+
+The parallel read algorithm is 
+
+```
+enable chip 
+for i from 0 to nlen
+    set address <address + i>
+    delay <ADDRESS_HOLD_TIME>
+    nbytes[i] = get data
+disable chip
+```
+
