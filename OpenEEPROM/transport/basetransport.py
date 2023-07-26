@@ -9,3 +9,7 @@ class BaseTransport(ABC):
     def receive(self, byte_count: int) -> bytes:
         pass
 
+    @abstractmethod
+    def flush(self) -> None:
+        pass
+

@@ -12,3 +12,6 @@ class DummyTransport(BaseTransport):
     def receive(self, byte_count: int) -> bytes:
         return bytes([ACK]) + bytes(byte_count - 1)
 
+    def flush(self) -> None:
+        return
+

@@ -14,3 +14,7 @@ class SerialTransport(BaseTransport):
         data = self.serial.read(byte_count)
         return data
 
+    def flush(self) -> None:
+        self.serial.reset_input_buffer()
+        self.serial.reset_output_buffer()
+
