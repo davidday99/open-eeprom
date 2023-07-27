@@ -38,7 +38,7 @@ class OpenEEPROMClient:
         self.io = io_handle
         self.sync()
         self.max_rx_size = self.get_max_rx_size()
-        self.max_tx_size = self.get_max_rx_size()
+        self.max_tx_size = self.get_max_tx_size()
         self.max_par_read_count = self.max_tx_size - 1
         self.max_par_write_count = self.max_rx_size - 9
         self.max_spi_transmit_count = min(self.max_rx_size - 5, self.max_tx_size - 1)
