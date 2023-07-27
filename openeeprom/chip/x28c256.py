@@ -2,7 +2,7 @@ import time
 from typing import List
 
 from .basechip import BaseChip
-from ..client import OpenEEPROMClient
+from openeeprom.client import OpenEEPROMClient
 
 
 class X28C256(BaseChip):

@@ -2,11 +2,11 @@ import pytest
 import random
 import time
 
-from OpenEEPROM.chip.basechip import BaseChip
-from OpenEEPROM.chip.dummychip import DummyChip
-from OpenEEPROM.transport.serial import SerialTransport
-from OpenEEPROM.client import OpenEEPROMClient
-from OpenEEPROM.chip.x28c256 import X28C256
+from openeeprom.chip.basechip import BaseChip
+from openeeprom.chip.dummychip import DummyChip
+from openeeprom.transport.serial import SerialTransport
+from openeeprom.client import OpenEEPROMClient
+from openeeprom.chip.x28c256 import X28C256
 
 
 @pytest.fixture

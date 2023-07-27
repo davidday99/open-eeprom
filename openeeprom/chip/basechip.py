@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from OpenEEPROM.client import OpenEEPROMClient
+from openeeprom.client import OpenEEPROMClient
 
 
 class BaseChip(ABC):

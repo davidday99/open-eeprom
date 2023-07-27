@@ -1,7 +1,7 @@
 from .basechip import BaseChip 
 from typing import List
 
-from OpenEEPROM.client import OpenEEPROMClient
+from openeeprom.client import OpenEEPROMClient
 
 
 class DummyChip(BaseChip):

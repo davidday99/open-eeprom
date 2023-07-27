@@ -1,8 +1,9 @@
 import pytest
 import struct
 
-from OpenEEPROM.client import OpenEEPROMClient, OpenEEPROMCommands
-from OpenEEPROM.transport.dummy import DummyTransport
+from openeeprom.client import OpenEEPROMClient, OpenEEPROMCommands
+from openeeprom.transport.dummy import DummyTransport
+
 
 @pytest.fixture
 def dummy_client():
