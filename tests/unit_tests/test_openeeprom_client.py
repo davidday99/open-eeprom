@@ -9,6 +9,9 @@ def dummy_client():
     client = OpenEEPROMClient(DummyTransport())
     client.max_rx_size = 1024
     client.max_tx_size = 1024
+    client.max_par_read_count = 1024
+    client.max_par_write_count = 1024
+    client.max_spi_transmit_count = 1024
     return client
 
 
@@ -75,7 +78,7 @@ class TestOpenEEPROMClient:
 
     def test_parallel_read_exceed_length(self, dummy_client):
         with pytest.raises(Exception):
-            result = dummy_client.parallel_read(0, dummy_client.max_tx_size + 1) 
+            result = dummy_client.parallel_read(0, dummy_client.max_par_read_count + 1) 
 
     def test_parallel_write(self, dummy_client):
         write_list = [1, 2, 3, 4]
@@ -87,7 +90,7 @@ class TestOpenEEPROMClient:
     
     def test_parallel_write_exceed_length(self, dummy_client):
         with pytest.raises(Exception):
-            result = dummy_client.parallel_write(0, dummy_client.max_rx_size + 1) 
+            result = dummy_client.parallel_write(0, dummy_client.max_par_write_count + 1) 
 
     def test_set_clock_freq(self, dummy_client):
         with pytest.raises(Exception):
@@ -107,4 +110,9 @@ class TestOpenEEPROMClient:
         assert dummy_client.io.txfifo[1:5] == struct.pack('<I', len(write_list)) 
         assert dummy_client.io.txfifo[5:9] == struct.pack('BBBB', *write_list)
 
+
+    def test_spi_transmit(self, dummy_client):
+        with pytest.raises(Exception):
+            write_list = [0] * dummy_client.max_spi_transmit_count + 1
+            dummy_client.spi_transmit(write_list) 
 

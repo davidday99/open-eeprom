@@ -39,6 +39,9 @@ class OpenEEPROMClient:
         self.sync()
         self.max_rx_size = self.get_max_rx_size()
         self.max_tx_size = self.get_max_rx_size()
+        self.max_par_read_count = self.max_tx_size - 1
+        self.max_par_write_count = self.max_rx_size - 9
+        self.max_spi_transmit_count = min(self.max_rx_size - 5, self.max_tx_size - 1)
 
     def nop(self):
         cmd = bytes([OpenEEPROMCommands.NOP.value])
@@ -133,9 +136,7 @@ class OpenEEPROMClient:
         return set_width_time
 
     def parallel_read(self, address: int, byte_count: int) -> List[int]:
-        max_read_count = self.max_tx_size - 1
-
-        if byte_count > max_read_count:
+        if byte_count > self.max_par_read_count:
             raise OpenEEPROMCommandFailedException('Read count exceeds device transmit buffer size.')
 
         cmd = bytes([OpenEEPROMCommands.PARALLEL_READ.value]) + struct.pack('<I', address) + struct.pack('<I', byte_count)
@@ -146,10 +147,9 @@ class OpenEEPROMClient:
 
 
     def parallel_write(self, address: int, byte_list: List[int]):
-        max_write_count = self.max_rx_size - 9
         byte_count = len(byte_list)
 
-        if byte_count > max_write_count:
+        if byte_count > self.max_par_write_count:
             raise OpenEEPROMCommandFailedException('Write count exceeds device receive buffer size.')
 
         cmd = bytes([OpenEEPROMCommands.PARALLEL_WRITE.value]) + struct.pack('<I', address) + struct.pack('<I', byte_count) + bytes(byte_list)
@@ -189,10 +189,9 @@ class OpenEEPROMClient:
         return supported_modes
 
     def spi_transmit(self, byte_list: List[int]) -> List[int]:
-        max_transmit_count= min(self.max_rx_size - 5, self.max_tx_size - 1)
         byte_count = len(byte_list)   
 
-        if byte_count > max_transmit_count:
+        if byte_count > self.max_spi_transmit_count:
             raise OpenEEPROMCommandFailedException('Transmit count must fit within device receive and transmit buffers.')
 
         cmd = bytes([OpenEEPROMCommands.SPI_TRANSMIT.value]) + struct.pack('<I', byte_count) + bytes(byte_list)
