@@ -75,3 +75,6 @@ New chips are added to `openeeprom/chip/`. See the `docs` for details on writing
 
 GPLv3 (See LICENSE).
 
+## Contact
+
+You can reach me at david.day2017@gmail.com.
