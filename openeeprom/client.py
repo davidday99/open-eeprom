@@ -169,7 +169,7 @@ class OpenEEPROMClient:
         return set_freq
 
     def set_spi_mode(self, mode: int) -> int:
-        cmd = bytes([OpenEEPROMCommands.SET_SPI_MODE.value]) + struct.pack('c', mode) 
+        cmd = bytes([OpenEEPROMCommands.SET_SPI_MODE.value]) + struct.pack('B', mode) 
         self.io.send(cmd)
         self._check_response_status()
         result = self.io.receive(1)

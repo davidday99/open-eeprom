@@ -5,16 +5,18 @@ import time
 from openeeprom.chip.basechip import BaseChip
 from openeeprom.chip.dummychip import DummyChip
 from openeeprom.transport.serial import SerialTransport
+from openeeprom.transport.dummy import DummyTransport 
 from openeeprom.client import OpenEEPROMClient
-from openeeprom.chip.x28c256 import X28C256
+from openeeprom.chip.microchip25lc320 import MC25LC320
 
 
 @pytest.fixture
 def chip() -> BaseChip:
     s = SerialTransport('/dev/ttyACM0', 115200)
     client = OpenEEPROMClient(s)
-    device = X28C256(client)
+    device = MC25LC320(client)
     return device 
+
 
 class TestChip:
     def test_write(self, chip):
