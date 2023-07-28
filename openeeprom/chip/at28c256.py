@@ -5,9 +5,9 @@ from .basechip import BaseChip
 from openeeprom.client import OpenEEPROMClient
 
 
-class X28C256(BaseChip):
+class AT28C256(BaseChip):
     def __init__(self):
-        super().__init__('x28c256', 32768)
+        super().__init__('at28c256', 32768)
 
     def connect(self, client: OpenEEPROMClient):
         self.client = client

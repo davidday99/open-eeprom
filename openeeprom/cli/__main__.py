@@ -2,7 +2,7 @@ import argparse
 
 from openeeprom.chip import \
         microchip25lc320, \
-        x28c256
+        at28c256
 from openeeprom.transport.serial import SerialTransport
 from openeeprom.client import OpenEEPROMClient
 
@@ -12,7 +12,7 @@ A tool for accessing EEPROM and flash chips.
 
 SUPPORTED_DEVICES = {
         '25LC320': microchip25lc320.MC25LC320(),
-        'X28C256': x28c256.X28C256(),
+        'AT28C256': at28c256.AT28C256(),
 }
 
 
