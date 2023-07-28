@@ -17,10 +17,18 @@ class MC25LC320Commands(Enum):
 
 
 class MC25LC320(BaseChip):
-    def __init__(self, client: OpenEEPROMClient):
-        super().__init__('25LC320', 4096, client)
+    def __init__(self):
+        super().__init__('25LC320', 4096)
+
+    def connect(self, client: OpenEEPROMClient):
+        self.client = client
         self.client.set_spi_mode(0)
         self.client.set_spi_clock_freq(2000000)
+
+    def disconnect(self):
+        #TODO: other steps to ensure clean disconnect?
+        self.client.sync()
+        self.client = None
 
     def read(self, address: int, byte_count: int) -> List[int]:
         if address + byte_count > self.size or address < 0:

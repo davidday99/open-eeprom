@@ -14,7 +14,8 @@ from openeeprom.chip.microchip25lc320 import MC25LC320
 def chip() -> BaseChip:
     s = SerialTransport('/dev/ttyACM0', 115200)
     client = OpenEEPROMClient(s)
-    device = MC25LC320(client)
+    device = MC25LC320()
+    device.connect(client)
     return device 
 
 

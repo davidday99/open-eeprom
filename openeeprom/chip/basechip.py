@@ -5,10 +5,18 @@ from openeeprom.client import OpenEEPROMClient
 
 
 class BaseChip(ABC):
-    def __init__(self, name: str, size: int, client: OpenEEPROMClient):
+    def __init__(self, name: str, size: int):
         self.name = name
         self.size = size
-        self.client = client
+        self.client = None
+
+    @abstractmethod
+    def connect(self, client: OpenEEPROMClient):
+        pass
+
+    @abstractmethod
+    def disconnect(self):
+        pass
     
     @abstractmethod
     def read(self, address: int, byte_count: int) -> List[int]:

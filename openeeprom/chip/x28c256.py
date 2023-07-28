@@ -6,11 +6,19 @@ from openeeprom.client import OpenEEPROMClient
 
 
 class X28C256(BaseChip):
-    def __init__(self, client: OpenEEPROMClient):
-        super().__init__('x28c256', 32768, client)
+    def __init__(self):
+        super().__init__('x28c256', 32768)
+
+    def connect(self, client: OpenEEPROMClient):
+        self.client = client
         self.client.set_address_bus_width(15)
         self.client.set_address_hold_time(250)
         self.client.set_pulse_width_time(250)
+         
+    def disconnect(self):
+        #TODO: other steps to ensure clean disconnect?
+        self.client.sync()
+        self.client = None
 
     def read(self, address: int, byte_count: int) -> List[int]:
         if address + byte_count > self.size or address < 0:
