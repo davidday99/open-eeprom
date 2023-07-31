@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 from openeeprom.chip import \
         microchip25lc320, \
@@ -55,11 +56,13 @@ def do_read(chip, args):
     count = int(args.count) if args.count else chip.size
     data = chip.read(offset, count)
     
+    data = bytes(data)
+
     if args.file:
         with open(args.file, 'wb') as f:
-            f.write(bytes(data))
+            f.write(data)
     else:
-        print(data)
+        sys.stdout.buffer.write(data)
 
 
 def do_write(chip, args):
