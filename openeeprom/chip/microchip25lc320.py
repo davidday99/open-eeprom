@@ -19,6 +19,7 @@ class MC25LC320Commands(Enum):
 class MC25LC320(BaseChip):
     def __init__(self):
         super().__init__('25LC320', 4096)
+        self.description = '''Microchip 4KB SPI EEPROM'''
 
     def connect(self, client: OpenEEPROMClient):
         self.client = client

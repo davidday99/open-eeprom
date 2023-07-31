@@ -33,8 +33,10 @@ def main():
     
     if args.command == 'list':
         chips = SUPPORTED_DEVICES.keys()
+        print('Supported chips:')
+        print()
         for chip in chips:
-            print(chip)
+            print(chip, '\t', SUPPORTED_DEVICES[chip].description)
         return
 
     if args.serial:

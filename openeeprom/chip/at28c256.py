@@ -8,6 +8,7 @@ from openeeprom.client import OpenEEPROMClient
 class AT28C256(BaseChip):
     def __init__(self):
         super().__init__('at28c256', 32768)
+        self.description = '''Atmel Parallel EEPROM, 15-bit address bus'''
 
     def connect(self, client: OpenEEPROMClient):
         self.client = client
