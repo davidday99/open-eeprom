@@ -13,3 +13,7 @@ class BaseTransport(ABC):
     def flush(self) -> None:
         pass
 
+    @abstractmethod
+    def close(self) -> None:
+        pass
+

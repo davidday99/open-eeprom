@@ -18,3 +18,7 @@ class SerialTransport(BaseTransport):
         self.serial.reset_input_buffer()
         self.serial.reset_output_buffer()
 
+    def close(self) -> None:
+        self.flush()
+        self.serial.close()
+
