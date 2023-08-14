@@ -1,3 +1,5 @@
+.. _new chip support:
+
 Adding Support for New Chips
 ============================
 

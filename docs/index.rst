@@ -12,6 +12,7 @@ Welcome to OpenEEPROM's documentation!
    usage/getting_started
    usage/protocol
    design/architecture
+   design/python_host
    usage/new_chip_support
 
 Indices and tables

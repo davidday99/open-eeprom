@@ -32,7 +32,7 @@ Install the dependencies:
 
    $ pip install -r requirements.txt
 
-Set up your programmer with the `OpenEEPROM firmware <https://github.com/davidday99/open-eeprom-fw.git>`_. 
+Program an MCU with the `OpenEEPROM firmware <https://github.com/davidday99/open-eeprom-fw.git>`_. 
 After that, you're good to go.
 
            
@@ -84,5 +84,5 @@ OpenEEPROM is a free and open source alternative to products like the
 series of programmers.
 
 If OpenEEPROM doesn't support a chip, it's easy to create and test a host-side driver that will enable
-reading, writing, and erasing, as well as any chip-specific features. See Adding Support for New Chips for details.
+reading, writing, and erasing, as well as any chip-specific features. See :ref:`new chip support` for details.
 
