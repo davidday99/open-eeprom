@@ -43,7 +43,7 @@ You can call OpenEEPROM from the command line.
 
 .. code-block:: bash 
 
-    $ python -m openeeprom.cli list
+    $ python -m openeeprom list
 
 This will list all the supported chips. 
 
@@ -52,14 +52,14 @@ Here is how you would write to a 25LC320 SPI EEPROM:
 
 .. code-block:: bash 
 
-    $ python -m openeeprom.cli write --file input.txt --chip 25LC320 --serial /dev/ttyACM0:115200
+    $ python -m openeeprom write --file input.txt --chip 25LC320 --serial /dev/ttyACM0:115200
 
 
 Or read the contents of an Atmel 28C256 parallel EEPROM:
 
 .. code-block:: bash 
 
-    $ python -m openeeprom.cli read --file output.bin --chip AT28C256 --serial /dev/ttyACM0:115200
+    $ python -m openeeprom read --file output.bin --chip AT28C256 --serial /dev/ttyACM0:115200
 
 
 You can also import OpenEEPROM directly:

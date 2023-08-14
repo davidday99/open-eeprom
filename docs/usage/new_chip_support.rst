@@ -222,5 +222,5 @@ to the main CLI driver in ``openeeprom/cli/__main__.py``.
             'AT28C256': at28c256.AT28C256(),
     }
 
-Run ``python -m openeeprom.cli list`` and see that the chip is now listed.
+Run ``python -m openeeprom list`` and see that the chip is now listed.
 
