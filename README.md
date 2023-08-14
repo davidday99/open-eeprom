@@ -1,21 +1,17 @@
 # OpenEEPROM
 
 OpenEEPROM is a universal programmer for EEPROMs and flash chips. 
-It consists of a client and server that communicate using the 
-OpenEEPROM protocol (see `open-eeprom-protocol.txt`). 
-Typically the server will be an embedded controller, but it could 
-be any device that can receive commands from a client and 
-send digital signals to an attached memory chip. 
+It consists of a host and programmer that communicate using the 
+OpenEEPROM protocol.
 
-The topology goes:
+## Installation
 
-CLIENT --> SERVER --> CHIP 
+1. Recursively clone the repository. Program an MCU with the firmware located 
+in the submodule `open-eeprom-fw`.
 
-where a transport layer such as serial or TCP sits between CLIENT and SERVER,
-and digital IO takes place between SERVER and CHIP.
+2. Run `pip install -r requirements.txt` to install Python dependencies.
 
-Chip drivers exist on the client side and implement `read`, `write`, and `erase` commands
-using primitive commands supported by the OpenEEPROM protocol.
+3. Run `make html` inside `docs/` to view more detailed documentation.
 
 ## Examples
 
@@ -55,10 +51,6 @@ Rather than spending money and waiting on shipping,
 you can turn practically any MCU you have on hand into a programmer
 in under an hour.
 
-Another benefit of OpenEEPROM is its ability to integrate into a system. 
-Have an embedded system that includes external memory? Run an OpenEEPROM 
-server on the processor connected to the memory device.
-
 ## Organization 
 
 `openeeprom` is a Python client implementation that can be called as in the above examples.
@@ -67,10 +59,6 @@ server on the processor connected to the memory device.
 
 See `docs` for a more detailed and development-oriented view of the project.
 
-## Adding New Chips
-
-New chips are added to `openeeprom/chip/`. See the `docs` for details on writing a driver.
-
 ## License
 
 GPLv3 (See LICENSE).
@@ -78,3 +66,4 @@ GPLv3 (See LICENSE).
 ## Contact
 
 You can reach me at david.day2017@gmail.com.
+
