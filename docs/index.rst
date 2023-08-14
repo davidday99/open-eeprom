@@ -8,9 +8,11 @@ Welcome to OpenEEPROM's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
-
-
+    
+   usage/getting_started
+   usage/protocol
+   design/architecture
+   usage/new_chip_support
 
 Indices and tables
 ==================
@@ -18,3 +20,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+

@@ -1,0 +1,13 @@
+@startuml
+
+rectangle Host #lightgreen
+rectangle Programmer #orange
+rectangle Chip #lightblue
+
+Host -> Programmer
+Programmer -> Host
+Programmer -> Chip
+Chip -> Programmer
+
+@enduml
+
